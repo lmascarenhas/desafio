@@ -17,3 +17,9 @@ sbnt_name_us_east_1_d: sbnt_nv_desafio_d
 routeTable_default_name_us_east_1: rt_nv_desafio_default
 sg_default_name_us_east_1: sg_nv_desafio_default
 cidr_all: 0.0.0.0/0
+
+ec2_kp_name: desafio
+ec2_ami_base: ami-0058bb7d
+ec2_role_name: ec2_role
+ec2_jenkins_name: Jenkins-SERVER
+ec2_jenkins_instanceType: t2.micro
