@@ -1,0 +1,25 @@
+---
+# tasks file for roles/ec2_create_jenkins.yml
+
+- name: Include vars of resources.yml
+  include_vars:
+    file: vars/resources.yml
+    name: resources
+
+- name: Include vars of dynamic.yml
+  include_vars:
+    file: vars/dynamic.yml
+    name: dynamic
+    
+- ec2:
+    key_name: mykey
+    instance_type: c1.medium
+    image: ami-40603AD1
+    wait: yes
+    group: webserver
+    instance_tags:
+        Name: bar
+    exact_count: 5
+    count_tag: foo
+    vpc_subnet_id: subnet-29e63245
+    assign_public_ip: yes

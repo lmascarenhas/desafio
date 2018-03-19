@@ -1,0 +1,28 @@
+---
+# tasks file for roles/get_vpc_us_east_1
+
+- name: Include vars of resources.yml
+  include_vars:
+    file: vars/resources.yml
+    name: resources
+
+- name: Get VPC in {{resources.region}}
+  ec2_vpc_net_facts:
+    profile: "{{resources.profile}}"
+    region: "{{resources.region}}"
+    filters:
+      "tag:Name": "{{resources.vpc_name_us_east_1}}"
+  register: vpc_data
+
+- name: Clean vpc id into dynamic file
+  lineinfile:
+   state: absent
+   dest: "{{resources.var_dynamic_file}}"
+   regexp: "{{resources.vpc_name_us_east_1}}"
+
+- name: Write vpc id to dynamic file
+  lineinfile:
+   state: present
+   dest: "{{resources.var_dynamic_file}}"
+   line: '{{resources.vpc_name_us_east_1}}: {{ item.id }}'
+  with_items: "{{vpc_data.vpcs}}"

@@ -1,0 +1,18 @@
+---
+# tasks file for roles/set_vpc_us_east_1
+- name: Include vars of resources.yml
+  include_vars:
+    file: vars/resources.yml
+    name: resources
+
+- name: Set VPC in {{resources.region}}
+  ec2_vpc_net:
+    profile: "{{resources.profile}}"
+    region: "{{resources.region}}"
+    name: "{{resources.vpc_name_us_east_1}}"
+    state: present
+    cidr_block: "{{resources.vpc_cidr_us_east_1}}"
+    tags:
+      Env: "{{resources.environment}}"
+      Teste: "{{resources.environment}}"
+      Teste2: "{{resources.environment}}"

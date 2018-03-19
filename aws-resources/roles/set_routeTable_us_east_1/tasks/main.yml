@@ -1,0 +1,29 @@
+---
+# tasks file for roles/set_routeTable_us_east_1
+
+- name: Include vars of resources.yml
+  include_vars:
+    file: vars/resources.yml
+    name: resources
+
+- name: Include vars of dynamic.yml
+  include_vars:
+    file: vars/dynamic.yml
+    name: dynamic
+
+- name: Set up public subnet route table
+  ec2_vpc_route_table:
+    profile: "{{resources.profile}}"
+    region: "{{resources.region}}"
+    vpc_id: "{{dynamic.vpc_nv_desafio}}"
+    tags:
+      Env: "{{resources.environment}}"
+      Name: "{{resources.routeTable_default_name_us_east_1}}"
+    subnets:
+      - "{{ dynamic.sbnt_nv_desafio_a }}"
+      - "{{ dynamic.sbnt_nv_desafio_b }}"
+      - "{{ dynamic.sbnt_nv_desafio_c }}"
+      - "{{ dynamic.sbnt_nv_desafio_d }}"
+    routes:
+      - dest: 0.0.0.0/0
+        gateway_id: "{{ dynamic.igw_nv_desafio }}"

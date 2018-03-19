@@ -1,0 +1,36 @@
+---
+# tasks file for roles/set_securityGroup_us_east_1
+
+- name: Include vars of resources.yml
+  include_vars:
+    file: vars/resources.yml
+    name: resources
+
+- name: Include vars of dynamic.yml
+  include_vars:
+    file: vars/dynamic.yml
+    name: dynamic
+
+- name: Set up Security Group {{resources.sg_default_name_us_east_1}}
+  ec2_group:
+    profile: "{{resources.profile}}"
+    region: "{{resources.region}}"
+    name: "{{resources.sg_default_name_us_east_1}}"
+    description: Security Group - {{resources.sg_default_name_us_east_1}}
+    vpc_id: "{{dynamic.vpc_nv_desafio}}"
+    rules:
+      - proto: tcp
+        from_port: 80
+        to_port: 80
+        cidr_ip: "{{resources.cidr_all}}"
+      - proto: tcp
+        from_port: 8080
+        to_port: 8080
+        cidr_ip: "{{resources.cidr_all}}"
+      - proto: tcp
+        from_port: 22
+        to_port: 22
+        cidr_ip: "{{resources.cidr_all}}"
+    tags:
+      Env: "{{resources.environment}}"
+      Name: "{{resources.sg_default_name_us_east_1}}"

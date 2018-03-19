@@ -1,0 +1,63 @@
+---
+# tasks file for roles/set_subnet_us_east_1
+- name: Include vars of resources.yml
+  include_vars:
+    file: vars/resources.yml
+    name: resources
+
+- name: Include vars of dynamic.yml
+  include_vars:
+    file: vars/dynamic.yml
+    name: dynamic
+
+- name: Set Subnet AZ(a) in {{resources.region}}
+  ec2_vpc_subnet:
+    profile: "{{resources.profile}}"
+    region: "{{resources.region}}"
+    state: present
+    vpc_id: "{{dynamic.vpc_nv_desafio}}"
+    cidr: "{{resources.sbnt_cidr_us_east_1_a}}"
+    az: us-east-1a
+    map_public: true
+    tags:
+      Env: "{{resources.environment}}"
+      Name: "{{resources.sbnt_name_us_east_1_a}}"
+
+- name: Set Subnet AZ(b) in {{resources.region}}
+  ec2_vpc_subnet:
+    profile: "{{resources.profile}}"
+    region: "{{resources.region}}"
+    state: present
+    vpc_id: "{{dynamic.vpc_nv_desafio}}"
+    cidr: "{{resources.sbnt_cidr_us_east_1_b}}"
+    az: us-east-1b
+    map_public: true
+    tags:
+      Env: "{{resources.environment}}"
+      Name: "{{resources.sbnt_name_us_east_1_b}}"
+
+- name: Set Subnet AZ(c) in {{resources.region}}
+  ec2_vpc_subnet:
+    profile: "{{resources.profile}}"
+    region: "{{resources.region}}"
+    state: present
+    vpc_id: "{{dynamic.vpc_nv_desafio}}"
+    cidr: "{{resources.sbnt_cidr_us_east_1_c}}"
+    az: us-east-1c
+    map_public: true
+    tags:
+      Env: "{{resources.environment}}"
+      Name: "{{resources.sbnt_name_us_east_1_c}}"
+
+- name: Set Subnet AZ(d) in {{resources.region}}
+  ec2_vpc_subnet:
+    profile: "{{resources.profile}}"
+    region: "{{resources.region}}"
+    state: present
+    vpc_id: "{{dynamic.vpc_nv_desafio}}"
+    cidr: "{{resources.sbnt_cidr_us_east_1_d}}"
+    az: us-east-1d
+    map_public: true
+    tags:
+      Env: "{{resources.environment}}"
+      Name: "{{resources.sbnt_name_us_east_1_d}}"
