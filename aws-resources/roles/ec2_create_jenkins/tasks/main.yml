@@ -1,0 +1,39 @@
+---
+# tasks file for roles/ec2_create_jenkins.yml
+
+- name: Include vars of resources.yml
+  include_vars:
+    file: vars/resources.yml
+    name: resources
+
+- name: Include vars of dynamic.yml
+  include_vars:
+    file: vars/dynamic.yml
+    name: dynamic
+
+- name: Create EC2 for Jenkins
+  ec2:
+    profile: "{{resources.profile}}"
+    region: "{{resources.region}}"
+    key_name: "{{resources.ec2_kp_name}}"
+    group_id: "{{dynamic.sg_nv_desafio_default}}"
+    instance_type: "{{resources.ec2_jenkins_instanceType}}"
+    image: "{{resources.ec2_ami_base}}"
+    instance_profile_name: "{{resources.ec2_role_name}}"
+    vpc_subnet_id: "{{dynamic.sbnt_nv_desafio_a}}"
+    wait: yes
+    count_tag:
+        Name: "{{resources.ec2_jenkins_name}}"
+    exact_count: 1
+    user_data: "{{ lookup('file', 'user_data.sh') }}"
+    instance_tags:
+        Name: "{{resources.ec2_jenkins_name}}"
+        Env: "{{resources.environment}}"
+  register: ec2_data
+
+- name: Wait 300 seconds for port 8080
+  wait_for:
+    delay: 300
+    host: "{{ec2_data.instances[0].public_ip}}"
+    port: 8080
+    state: started

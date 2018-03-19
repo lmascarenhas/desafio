@@ -1,0 +1,9 @@
+#playbook VPC
+---
+- hosts: localhost
+  connection: local
+  gather_facts: False
+
+  roles:
+      # Create EC2
+      - ec2_create_jenkins
