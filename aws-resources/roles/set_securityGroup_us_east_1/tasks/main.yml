@@ -28,6 +28,10 @@
         to_port: 8080
         cidr_ip: "{{resources.cidr_all}}"
       - proto: tcp
+        from_port: 39775
+        to_port: 39775
+        cidr_ip: "{{resources.cidr_all}}"
+      - proto: tcp
         from_port: 22
         to_port: 22
         cidr_ip: "{{resources.cidr_all}}"
