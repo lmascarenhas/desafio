@@ -1,0 +1,28 @@
+---
+# tasks file for roles/get_igw_us_east_1
+
+- name: Include vars of resources.yml
+  include_vars:
+    file: vars/resources.yml
+    name: resources
+
+- name: Get IGW in {{resources.region}}
+  ec2_vpc_igw_facts:
+    profile: "{{resources.profile}}"
+    region: "{{resources.region}}"
+    filters:
+      "tag:Name": "{{resources.igw_name_us_east_1}}"
+  register: igw_data
+
+- name: Clean IGW id into dynamic file
+  lineinfile:
+   state: absent
+   dest: "{{resources.var_dynamic_file}}"
+   regexp: "{{resources.igw_name_us_east_1}}"
+
+- name: Write IGW id to dynamic file
+  lineinfile:
+   state: present
+   dest: "{{resources.var_dynamic_file}}"
+   line: '{{resources.igw_name_us_east_1}}: {{ item.internet_gateway_id }}'
+  with_items: "{{igw_data.internet_gateways}}"

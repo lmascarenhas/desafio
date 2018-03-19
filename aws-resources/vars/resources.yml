@@ -1,0 +1,19 @@
+# vars file for aws resources vars
+region: us-east-1
+profile: luizmascarenhasdesafio
+environment: desafio
+var_dynamic_file: vars/dynamic.yml
+vpc_name_us_east_1: vpc_nv_desafio 
+vpc_cidr_us_east_1: 10.10.0.0/16
+igw_name_us_east_1: igw_nv_desafio 
+sbnt_cidr_us_east_1_a: 10.10.1.0/24
+sbnt_name_us_east_1_a: sbnt_nv_desafio_a
+sbnt_cidr_us_east_1_b: 10.10.2.0/24
+sbnt_name_us_east_1_b: sbnt_nv_desafio_b
+sbnt_cidr_us_east_1_c: 10.10.3.0/24
+sbnt_name_us_east_1_c: sbnt_nv_desafio_c
+sbnt_cidr_us_east_1_d: 10.10.4.0/24
+sbnt_name_us_east_1_d: sbnt_nv_desafio_d
+routeTable_default_name_us_east_1: rt_nv_desafio_default
+sg_default_name_us_east_1: sg_nv_desafio_default
+cidr_all: 0.0.0.0/0

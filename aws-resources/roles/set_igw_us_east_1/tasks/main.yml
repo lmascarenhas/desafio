@@ -1,0 +1,21 @@
+---
+# tasks file for roles/set_igw_us_east_1
+- name: Include vars of resources.yml
+  include_vars:
+    file: vars/resources.yml
+    name: resources
+
+- name: Include vars of dynamic.yml
+  include_vars:
+    file: vars/dynamic.yml
+    name: dynamic
+
+- name: Set IGW in {{resources.region}}
+  ec2_vpc_igw:
+    profile: "{{resources.profile}}"
+    region: "{{resources.region}}"
+    vpc_id: "{{dynamic.vpc_nv_desafio}}"
+    state: present
+    tags:
+      Env: "{{resources.environment}}"
+      Name: "{{resources.igw_name_us_east_1}}"

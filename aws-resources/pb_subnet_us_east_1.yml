@@ -1,0 +1,13 @@
+#playbook SUBNET
+---
+- hosts: localhost
+  connection: local
+  gather_facts: False
+
+  roles:
+      # Configuracao Subnets
+      - set_subnet_us_east_1
+      - get_subnet_us_east_1
+      # Configuracao Tabela de Rotas
+      - set_routeTable_us_east_1
+      - get_routeTable_us_east_1

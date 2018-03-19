@@ -1,0 +1,9 @@
+# vars file for dynamic vars
+vpc_nv_desafio: vpc-12a62769
+igw_nv_desafio: igw-c96eb4b1
+sbnt_nv_desafio_b: subnet-7d80b420
+sbnt_nv_desafio_d: subnet-61eddb4e
+sbnt_nv_desafio_a: subnet-bb18e0f1
+sbnt_nv_desafio_c: subnet-50091e34
+rt_nv_desafio_default: rtb-019a297d
+sg_nv_desafio_default: sg-25453653

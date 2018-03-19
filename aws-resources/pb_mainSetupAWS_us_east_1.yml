@@ -1,0 +1,12 @@
+---
+- hosts: localhost
+  connection: local
+  gather_facts: False
+
+  tasks:
+    - debug:
+        msg: "MANAGEMENT AWS RESOURCE"
+
+- import_playbook: pb_vpc_us_east_1.yml
+- import_playbook: pb_subnet_us_east_1.yml
+- import_playbook: pb_securityGroup_us_east_1.yml
