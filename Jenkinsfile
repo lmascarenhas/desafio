@@ -3,8 +3,8 @@ pipeline {
   stages {
     stage('Build') {
       agent {
-        docker {
-          image 'node:6'
+        node {
+          label 'Npm Install'
         }
         
       }
