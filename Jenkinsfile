@@ -8,22 +8,19 @@ pipeline {
   stages {
     stage('Install') {
       agent {
-        docker {
-          image 'node:9'
-          args '-u 0:0'
+        node {
+          label 'Slave'
         }
         
       }
       steps {
-        sh '''cd source
-npm install'''
+        sh 'cd source'
       }
     }
     stage('Test') {
       agent {
-        docker {
-          image 'node:9'
-          args '-u 0:0'
+        node {
+          label 'Slave'
         }
         
       }
@@ -34,15 +31,26 @@ npm test'''
     }
     stage('Test Coverage') {
       agent {
-        docker {
-          image 'node:9'
-          args '-u 0:0'
+        node {
+          label 'Slave'
         }
         
       }
       steps {
         sh '''cd source
 npm test -- --coverage'''
+      }
+    }
+    stage('Build') {
+      agent {
+        node {
+          label 'Slave'
+        }
+        
+      }
+      steps {
+        sh '''cd source
+npm run build'''
       }
     }
   }
