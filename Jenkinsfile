@@ -4,7 +4,7 @@ pipeline {
     stage('Build') {
       agent {
         node {
-          label 'Npm Install'
+          label 'install'
         }
         
       }
