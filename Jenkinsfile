@@ -1,5 +1,5 @@
 pipeline {
-  agent any
+  agent none
   stages {
     stage('Build') {
       agent {
@@ -10,8 +10,7 @@ pipeline {
         
       }
       steps {
-        sh '''cd source
-npm install'''
+        sh 'npm install'
       }
     }
   }
