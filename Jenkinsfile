@@ -10,7 +10,7 @@ pipeline {
         
       }
       steps {
-        sh 'npm install'
+        sh 'cd source && npm install'
       }
     }
   }
