@@ -25,15 +25,15 @@
     count_tag:
         Name: "{{resources.ec2_jenkins_name}}"
     exact_count: 1
-    user_data: "{{ lookup('file', 'user_data.sh') }}"
+    # user_data: "{{ lookup('file', 'user_data.sh') }}"
     instance_tags:
         Name: "{{resources.ec2_jenkins_name}}"
         Env: "{{resources.environment}}"
   register: ec2_data
 
-- name: Wait 300 seconds for port 8080
+- name: Wait 300 seconds for port 80
   wait_for:
     delay: 300
     host: "{{ec2_data.instances[0].public_ip}}"
-    port: 8080
+    port: 80
     state: started
