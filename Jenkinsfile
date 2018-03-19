@@ -14,7 +14,8 @@ pipeline {
         
       }
       steps {
-        sh 'cd source'
+        sh '''cd source
+npm install'''
       }
     }
     stage('Test') {
